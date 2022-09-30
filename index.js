@@ -10,27 +10,57 @@ app.get('/', (req, res) => {
     
     res.send(
         `
-        <h1>99 Bottles of Beer on the Wall</h1>
-        <a href='/98'>take one down, pass it around</a>
+        <h1>99 lines of code to debug</h1>
+        <h1>99 lines of code</h1>
+        <a href='/98'>look at one now, patch it around</a>
+        <h1>98 lines of code to debug</h1>
         `)
         
 })
 
 app.get('/:number_of_bottles', (req,res) => {
-    // number_of_bottles = bottlesCount
+    let bottlesCount = parseInt(req.params.number_of_bottles)
+    let randomUp = 0.3
+    let randomDown = 0.2
+    let randomNum = Math.floor(Math.random() * 50)
     // bottlesCount--
 
-    if (req.params.number_of_bottles == 0) {
+    if (bottlesCount <= 0) {
         res.send(
             `
-            <h1>${req.params.number_of_bottles} Bottles of Beer on the Wall</h1>
-            <a href='/'>Start Over</a>
+            <h1>Yay!!!!! You fixed it</h1>
+            <h2>${bottlesCount} lines of code to debug!</h2>
+            <a href='/'>Look at next project</a>
             `)
-    } else {
+            // <a href='/${Math.floor(Math.random) * 100}'>Look at next project</a>
+    } else if (Math.random() < randomUp) {
+        let randomBottles = bottlesCount + randomNum
+        console.log(randomBottles)
+        res.send(
+            `
+            <h1>${bottlesCount} lines of code to debug</h1>
+            <h1>${bottlesCount} lines of code</h1>
+            <a href='${randomBottles}'>look at one now, patch it around</a>
+            <h1>Crap! WHAT DID I DO? ${randomBottles} lines of code to debug</h1>
+            `)
+    } else if (Math.random() < randomDown) {
+        let randomBottles = bottlesCount - randomNum
+        res.send(
+            `
+            <h1>${bottlesCount} lines of code to debug</h1>
+            <h1>${bottlesCount} lines of code</h1>
+            <a href='${randomBottles}'>look at one now, patch it around</a>
+            <h1>OH SWEET! ${randomBottles} lines of code to debug</h1>
+            `)
+    }
+
+    {
         res.send(
         `
-        <h1>${req.params.number_of_bottles} Bottles of Beer on the Wall</h1>
-        <a href='/${req.params.number_of_bottles -1}'>take one down, pass it around</a>
+        <h1>${bottlesCount} lines of code to debug</h1>
+            <h1>${bottlesCount} lines of code</h1>
+            <a href='${bottlesCount - 1}'>look at one now, patch it around</a>
+            <h1>${bottlesCount - 1} lines of code to debug</h1>
         `)
     }
 })
