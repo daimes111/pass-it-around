@@ -18,51 +18,56 @@ app.get('/', (req, res) => {
         
 })
 
-app.get('/:number_of_bottles', (req,res) => {
-    let bottlesCount = parseInt(req.params.number_of_bottles)
-    let randomUp = 0.3
-    let randomDown = 0.2
+app.get('/:number_of_bugs', (req,res) => {
+    let bugsCount = parseInt(req.params.number_of_bugs)
     let randomNum = Math.floor(Math.random() * 50)
     // bottlesCount--
 
-    if (bottlesCount <= 0) {
+    if (bugsCount <= 0) {
         res.send(
             `
             <h1>Yay!!!!! You fixed it</h1>
-            <h2>${bottlesCount} lines of code to debug!</h2>
+            <h2>${bugsCount} lines of code to debug!</h2>
             <a href='/'>Look at next project</a>
             `)
             // <a href='/${Math.floor(Math.random) * 100}'>Look at next project</a>
-    } else if (Math.random() < randomUp) {
-        let randomBottles = bottlesCount + randomNum
-        console.log(randomBottles)
+    } else if (Math.random() < .3) {
+        let randomBugs = bugsCount + randomNum
+        console.log(randomBugs)
         res.send(
             `
-            <h1>${bottlesCount} lines of code to debug</h1>
-            <h1>${bottlesCount} lines of code</h1>
-            <a href='${randomBottles}'>look at one now, patch it around</a>
-            <h1>Crap! WHAT DID I DO? ${randomBottles} lines of code to debug</h1>
+            <h1>${bugsCount} lines of code to debug</h1>
+            <h1>${bugsCount} lines of code</h1>
+            <a href='${randomBugs}'>look at one now, patch it around</a>
+            <h1>Crap! WHAT DID I DO? ${randomBugs} lines of code to debug</h1>
             `)
-    } else if (Math.random() < randomDown) {
-        let randomBottles = bottlesCount - randomNum
+    } else if (Math.random() < .2) {
+        let randomBugs = bugsCount - randomNum
         res.send(
             `
-            <h1>${bottlesCount} lines of code to debug</h1>
-            <h1>${bottlesCount} lines of code</h1>
-            <a href='${randomBottles}'>look at one now, patch it around</a>
-            <h1>OH SWEET! ${randomBottles} lines of code to debug</h1>
+            <h1>${bugsCount} lines of code to debug</h1>
+            <h1>${bugsCount} lines of code</h1>
+            <a href='${randomBugs}'>look at one now, patch it around</a>
+            <h1>OH SWEET! ${randomBugs} lines of code to debug</h1>
+            `)
+    } else if (Math.random() < .1 && bugsCount >150) {
+        
+        res.send(
+            `
+            <h1>Woah! That one line of code was messing a bunch up!</h1>
+            <h2>0 lines of code to debug!</h2>
+            <a href='/'>Look at next project</a>
             `)
     }
 
-    {
         res.send(
         `
-        <h1>${bottlesCount} lines of code to debug</h1>
-            <h1>${bottlesCount} lines of code</h1>
-            <a href='${bottlesCount - 1}'>look at one now, patch it around</a>
-            <h1>${bottlesCount - 1} lines of code to debug</h1>
+        <h1>${bugsCount} lines of code to debug</h1>
+            <h1>${bugsCount} lines of code</h1>
+            <a href='${bugsCount - 1}'>look at one now, patch it around</a>
+            <h1>${bugsCount - 1} lines of code to debug</h1>
         `)
-    }
+
 })
 
 app.listen(3000, function() {
